@@ -1,0 +1,39 @@
+<template>
+  <v-content>
+    <h1>
+      Login Page
+    </h1>
+    <v-form>
+      <v-row>
+        <v-col cols="12" sm="12" md="6" lg="6">
+          <v-text-field v-model="mail" label="mail address"></v-text-field>
+          <v-text-field v-model="password" label="password"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-btn @click="submit">Log in</v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+    <a href="/register">I do not have an account yet.</a>
+  </v-content>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    mail: "",
+    password: ""
+  }),
+  methods: {
+    submit() {
+      if (!this.mail && !this.password) {
+        window.alert("REQUIRED");
+      } else {
+        window.alert(this.mail + " " + this.password);
+      }
+    }
+  }
+};
+</script>
