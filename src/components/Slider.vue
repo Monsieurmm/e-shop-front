@@ -19,7 +19,7 @@ export default {
     //
   }),
   created() {
-    this.$store.dispatch("sliders/GET_SLIDERS")
+    this.$store.dispatch("sliders/GET_SLIDERS");
   },
   computed: {
     ...mapState("sliders", ["sliders"])

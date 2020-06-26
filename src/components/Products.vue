@@ -60,7 +60,13 @@
 
             <v-row>
               <v-col cols="12" sm="12" md="12" lg="12" align="center">
-                <v-btn @click="addToCart" align="center" color="blue lighten-2" rounded>Add to Cart</v-btn>
+                <v-btn
+                  @click="addToCart"
+                  align="center"
+                  color="blue lighten-2"
+                  rounded
+                  >Add to Cart</v-btn
+                >
               </v-col>
             </v-row>
           </v-card>
@@ -84,12 +90,12 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$store.dispatch("addToCart", this.$route.params.id)
+      this.$store.dispatch("addToCart", this.$route.params.id);
     }
   },
   computed: {
     ...mapState("products", ["products"])
-  },
+  }
 };
 </script>
 

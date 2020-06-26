@@ -51,8 +51,8 @@ export default {
         .get("http://localhost:3000/products/" + this.$route.params.id)
         .then(response => {
           this.product = response.data;
-        })
-    },
+        });
+    }
   },
   created() {
     this.getProduct();
