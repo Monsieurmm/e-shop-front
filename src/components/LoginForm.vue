@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data: () => ({
     mail: "",
@@ -31,7 +32,11 @@ export default {
       if (!this.mail && !this.password) {
         window.alert("REQUIRED");
       } else {
-        window.alert(this.mail + " " + this.password);
+        let user = {
+          mail: this.mail,
+          password: this.password
+        };
+        axios.post("http://localhost:3000/login", user);
       }
     }
   }
