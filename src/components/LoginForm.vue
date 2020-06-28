@@ -36,7 +36,20 @@ export default {
           mail: this.mail,
           password: this.password
         };
-        axios.post("http://localhost:3000/login", user);
+        axios
+          .post("http://localhost:3000/login", user)
+          .then(() => {
+            this.$emit("showSnackbar", "You are now logged in", "green", 4000, "top")
+            this.$router.push("/profile");
+          }).catch(error => {
+          this.$emit(
+                  "showSnackbar",
+                  error.response.data.result,
+                  "red",
+                  4000,
+                  "top"
+          );
+        });
       }
     }
   }
