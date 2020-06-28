@@ -17,11 +17,6 @@
             label="password"
             :rules="passwordRules"
           ></v-text-field>
-          <v-text-field
-            v-model="confirmPassword"
-            label="confirm password"
-            :rules="confirm_passwordRules"
-          ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -31,7 +26,6 @@
       </v-row>
     </v-form>
     <a href="/login">I already have an account, i log in.</a>
-    <v-btn @click="snackbarTest">test</v-btn>
   </v-content>
 </template>
 
@@ -39,6 +33,7 @@
 import axios from "axios";
 export default {
   data: () => ({
+    error: "",
     snackbar: false,
     text: "",
     mail: "",
@@ -58,22 +53,40 @@ export default {
         ) ||
         "Password must have at least one Uppercase, one Lowercase, a number and a special character"
     ],
-    confirmPassword: "",
-    confirm_passwordRules: [v => !!v || "You must confirm your password"]
   }),
   methods: {
     register() {
-      if (this.mail && this.password && this.confirmPassword) {
+      if (this.mail && this.password) {
         let user = {
           mail: this.mail,
           password: this.password
         };
-        axios.post("http://localhost:3000/register", user);
-        this.$emit('showSnackbar', "You are now registered", 5000, 'bottom')
-        this.$router.push("/");
+        axios
+          .post("http://localhost:3000/register", user)
+          .then(() => {
+            this.$emit(
+              "showSnackbar",
+              "You are now registered",
+              "green",
+              5000,
+              "top"
+            );
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error.response.data.result);
+            this.$emit(
+              "showSnackbar",
+              error.response.data.result,
+              "red",
+              4000,
+              "top"
+            );
+          });
+      } else if (!this.mail || !this.password) {
+        this.$emit("showSnackbar", "You must fill the fields !", "", 4000, "top")
       }
-    },
-    snackbarTest() {}
+    }
   }
 };
 </script>
