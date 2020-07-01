@@ -39,17 +39,24 @@ export default {
         axios
           .post("http://localhost:3000/login", user)
           .then(() => {
-            this.$emit("showSnackbar", "You are now logged in", "green", 4000, "top")
+            this.$emit(
+              "showSnackbar",
+              "You are now logged in",
+              "green",
+              4000,
+              "top"
+            );
             this.$router.push("/profile");
-          }).catch(error => {
-          this.$emit(
-                  "showSnackbar",
-                  error.response.data.result,
-                  "red",
-                  4000,
-                  "top"
-          );
-        });
+          })
+          .catch(error => {
+            this.$emit(
+              "showSnackbar",
+              error.response.data.result,
+              "red",
+              4000,
+              "top"
+            );
+          });
       }
     }
   }

@@ -14,7 +14,7 @@ const sliders = {
 
   actions: {
     GET_SLIDERS: async ({ commit }) => {
-      let response = await axios.get("http://localhost:3000/slide");
+      let response = await axios.get("http://localhost:3000/slides");
       commit("SET_SLIDERS", response.data);
     }
   }

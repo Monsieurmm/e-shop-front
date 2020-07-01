@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <LeftNavDrawer />
+    <Navbar />
 
     <v-content class="mx-4 mb-4">
       <v-snackbar
@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import LeftNavDrawer from "./components/partials/LeftNavDrawer";
+import Navbar from "./components/partials/Navbar";
 export default {
   name: "App",
 
   components: {
-    LeftNavDrawer
+    Navbar
   },
 
   data: () => ({

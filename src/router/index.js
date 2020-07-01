@@ -7,34 +7,50 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: Home
   },
   {
     path: "/products",
-    name: "Products",
+    name: "products",
     component: () => import("../components/Products.vue")
   },
   {
     path: "/products/:id",
-    name: "ProductDetails",
+    name: "product",
     props: true,
-    component: () => import("../components/ProductDetails.vue")
+    component: () => import("../components/Product.vue")
+  },
+  {
+    path: "/categories/:category",
+    name: "category",
+    props: true,
+    component: () => import("../components/Category.vue")
   },
   {
     path: "/cart",
-    name: "Cart",
-    component: () => import("../components/Cart.vue")
+    name: "cart",
+    component: () => import("../components/Checkout.vue")
+  },
+  {
+    path: "/thankyou",
+    name: "thankyou",
+    component: () => import("../components/Thankyou.vue")
   },
   {
     path: "/login",
-    name: "LoginForm",
+    name: "login",
     component: () => import("../components/LoginForm.vue")
   },
   {
     path: "/register",
-    name: "RegisterForm",
+    name: "register",
     component: () => import("../components/RegisterForm.vue")
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: () => import("../components/Dashboard.vue")
   }
   /*,
   {

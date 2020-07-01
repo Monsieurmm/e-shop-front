@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Products from "../components/Products";
+import Products from "../components/SampleProducts";
 import Slider from "../components/Slider";
 import NewsLetter from "../components/partials/NewsLetter";
 import Footer from "../components/partials/Footer";

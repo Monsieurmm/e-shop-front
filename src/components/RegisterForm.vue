@@ -6,6 +6,7 @@
     <v-form ref="form" lazy-validation>
       <v-row>
         <v-col cols="12" sm="12" md="6" lg="6">
+          <v-text-field v-model="username" label="username"></v-text-field>
           <v-text-field
             v-model="mail"
             label="mail address"
@@ -36,6 +37,7 @@ export default {
     error: "",
     snackbar: false,
     text: "",
+    username: "",
     mail: "",
     mailRules: [
       v => !!v || "Mail is required",
@@ -52,17 +54,18 @@ export default {
           v
         ) ||
         "Password must have at least one Uppercase, one Lowercase, a number and a special character"
-    ],
+    ]
   }),
   methods: {
     register() {
-      if (this.mail && this.password) {
+      if (this.username && this.mail && this.password) {
         let user = {
+          username: this.username,
           mail: this.mail,
           password: this.password
         };
         axios
-          .post("http://localhost:3000/register", user)
+          .post("http://localhost:3000/users/register", user)
           .then(() => {
             this.$emit(
               "showSnackbar",
@@ -83,8 +86,14 @@ export default {
               "top"
             );
           });
-      } else if (!this.mail || !this.password) {
-        this.$emit("showSnackbar", "You must fill the fields !", "", 4000, "top")
+      } else if (!this.username || !this.mail || !this.password) {
+        this.$emit(
+          "showSnackbar",
+          "You must fill the fields !",
+          "",
+          4000,
+          "top"
+        );
       }
     }
   }
