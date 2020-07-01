@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import axios from "axios";
+  import api from "../config/api";
 import key from "../config/stripeKey";
 
 export default {
@@ -71,7 +71,7 @@ export default {
       image: "https://stripe.com/img/documentation/checkout/marketplace.png",
       locale: "auto",
       token: token => {
-        axios
+        api()
           .post("/charge", { stripeToken: token, total: total })
           .then(response => {
             let charge = response.data;

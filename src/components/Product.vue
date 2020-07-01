@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "../config/api";
 import mixins from "../mixins/mixins";
 
 export default {
@@ -56,7 +56,7 @@ export default {
     };
   },
   created() {
-    axios.get(`http://localhost:3000/products/${this.id}`).then(response => {
+    api().get(`/products/${this.id}`).then(response => {
       this.product = response.data;
     });
   },

@@ -50,7 +50,7 @@
 
 <script>
 import Checkout from "../Checkout";
-import axios from "axios";
+import api from "../../config/api";
 export default {
   components: {
     Checkout
@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     getCategories() {
-      axios.get("http://localhost:3000/categories").then(response => {
+      api().get("/categories").then(response => {
         this.categories = response.data;
       });
     }
