@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Cards from "../components/partials/products/Cards";
-import axios from "axios";
+import Cards from "./partials/products/Cards";
+import api from "../config/api";
 export default {
   components: {
     Cards
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     getProductsData() {
-      axios.get("http://localhost:3000/products").then(response => {
+      api().get("/products").then(response => {
         this.products = response.data.products;
         this.currentPage = response.data.currentPage;
         this.pages = response.data.pages;
@@ -46,7 +46,7 @@ export default {
       });
     },
     checkPage(url) {
-      axios.get(url).then(response => {
+      api().get(url).then(response => {
         this.products = response.data.products;
         this.currentPage = response.data.currentPage;
         this.pages = response.data.pages;

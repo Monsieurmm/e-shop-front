@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../config/api";
 const sliders = {
   namespaced: true,
 
@@ -14,7 +14,7 @@ const sliders = {
 
   actions: {
     GET_SLIDERS: async ({ commit }) => {
-      let response = await axios.get("http://localhost:3000/slides");
+      let response = await api().get("/slides");
       commit("SET_SLIDERS", response.data);
     }
   }

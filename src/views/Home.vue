@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <Slider />
-    <Products />
+    <SampleProducts />
     <NewsLetter />
     <v-footer color="white lighten-4" padless>
       <Footer />
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import Products from "../components/SampleProducts";
+import SampleProducts from "../components/SampleProducts";
 import Slider from "../components/Slider";
 import NewsLetter from "../components/partials/NewsLetter";
 import Footer from "../components/partials/Footer";
 
 export default {
   components: {
-    Products,
+    SampleProducts,
     Slider,
     NewsLetter,
     Footer
