@@ -2,6 +2,6 @@ import axios from "axios";
 
 export default () => {
   return axios.create({
-    baseURL: process.env.API_URL
+    baseURL: "https://afpa-shop-api.nw.r.appspot.com"
   });
 };

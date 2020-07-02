@@ -8,12 +8,49 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <script src="https://cdn.firebase.com/libs/firebaseui/4.5.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.5.0/firebaseui.css">
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
+  <h1>Datastore and Firebase Auth Example</h1>
+
+  <div id="firebaseui-auth-container"></div>
+
+  <button id="sign-out" hidden=true>Sign Out</button>
+
+  <div id="login-info" hidden=true>
+    <h2>Login info:</h2>
+    {% if user_data %}    <dl>
+    <dt>Name</dt><dd>{{ user_data['name'] }}</dd>
+    <dt>Email</dt><dd>{{ user_data['email'] }}</dd>
+    <dt>Last 10 visits</dt><dd>
+    {% for time in times %}          <p>{{ time['timestamp'] }}</p>
+    {% endfor %} </dd>
+  </dl>
+    {% elif error_message %}    <p>Error: {{ error_message }}</p>
+    {% endif %}</div>
     <!-- built files will be auto injected -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDxuGY2sqenGrmin2wfBv10skEJzcp3mCQ",
+        authDomain: "test-afpa-deploy.firebaseapp.com",
+        databaseURL: "https://test-afpa-deploy.firebaseio.com",
+        projectId: "test-afpa-deploy",
+        storageBucket: "test-afpa-deploy.appspot.com",
+        messagingSenderId: "835348740813",
+        appId: "1:835348740813:web:6b03625b478b0def1f4784",
+        measurementId: "G-K7WJDMS6DG"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </body>
 </html>
