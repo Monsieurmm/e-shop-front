@@ -5,7 +5,6 @@
       <ul class="list-group">
         <li class="list-group-item">Email: {{ user.email }}</li>
         <li class="list-group-item">Username: {{ user.username }}</li>
-        <li class="list-group-item">Name: {{ user.name }}</li>
       </ul>
     </div>
   </div>
@@ -14,7 +13,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "Profile",
+  name: "profile",
   computed: mapGetters("users", ["user"]),
   methods: {
     ...mapActions({

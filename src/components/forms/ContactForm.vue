@@ -6,7 +6,11 @@
         <v-form ref="form">
           <v-text-field v-model="name" label="Name" required></v-text-field>
           <v-text-field v-model="email" label="Email" required></v-text-field>
-          <v-textarea v-model="message" label="Your message" required></v-textarea>
+          <v-textarea
+            v-model="message"
+            label="Your message"
+            required
+          ></v-textarea>
           <v-btn value="Submit" @click="sendMessage">Send</v-btn>
         </v-form>
       </v-col>
@@ -32,15 +36,15 @@ export default {
         email: this.email,
         message: this.message
       };
-      if(!this.name || !this.email || !this.message) {
-          let error = "Missing credentials";
-          this.$emit(
-              "showSnackbar", `${error}`, "red", 4000, "top"
-          );
+      if (!this.name || !this.email || !this.message) {
+        let error = "Missing credentials";
+        this.$emit("showSnackbar", `${error}`, "red", 4000, "top");
       } else {
-          api().post("/contact", msg).then(response => {
-              let msg = response.data.message;
-              this.$emit("showSnackbar", `${msg}`, "green", 4000, "top");
+        api()
+          .post("/contact", msg)
+          .then(response => {
+            let msg = response.data.message;
+            this.$emit("showSnackbar", `${msg}`, "green", 4000, "top");
           });
       }
     }

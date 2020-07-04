@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../router";
 const users = {
   namespaced: true,
 
@@ -40,6 +41,15 @@ const users = {
     },
     AUTH_ERROR(state, err) {
       state.error = err.response.data.msg;
+    },
+    LOGOUT(state) {
+      state.error = null;
+      state.status = "";
+      state.token = "";
+      state.user = "";
+    },
+    PROFILE_REQUEST(state) {
+      state.status = "loading";
     }
   },
 
@@ -84,6 +94,13 @@ const users = {
       let res = await axios.get("http://localhost:3000/users/profile");
       commit("USER_PROFILE", res.data.user);
       return res;
+    },
+    LOGOUT: async ({ commit }) => {
+      await localStorage.removeItem("token");
+      commit("LOGOUT");
+      delete axios.defaults.headers.common["Authorization"];
+      router.push("/login");
+      return;
     }
   },
 

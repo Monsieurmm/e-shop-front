@@ -43,6 +43,16 @@
           </v-list-item-icon>
           <v-list-item-title align="right">{{ item.title }}</v-list-item-title>
         </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>
+            <router-link :to="{ name: 'login'}" v-if="!isLoggedIn">Log in</router-link>
+            <a to="/logout" v-if="isLoggedIn" @click.prevent="logoutUser">
+              <v-icon>how_to_reg</v-icon>
+            </a>
+          </v-list-item-title>
+        </v-list-item>
+
       </v-list>
     </v-navigation-drawer>
   </nav>
@@ -51,6 +61,7 @@
 <script>
 import Checkout from "../Checkout";
 import api from "../../config/api";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     Checkout
@@ -61,9 +72,8 @@ export default {
     drawer: false,
     items: [
       { title: "Home", icon: "house", route: "/" },
-      { title: "Account", icon: "account_box", route: "/login" },
       { title: "Products", icon: "shopping", route: "/products" },
-      { title: "Contact us", icon: "person", route: "/contact" }
+      { title: "Contact us", icon: "book", route: "/contact" }
     ]
   }),
   created() {
@@ -76,12 +86,21 @@ export default {
         .then(response => {
           this.categories = response.data;
         });
+    },
+    ...mapActions({
+      LOGOUT: "users/LOGOUT"
+    }),
+    logoutUser() {
+      this.LOGOUT();
     }
   },
   computed: {
     cart() {
       return this.$store.getters["cart/GET_CART"];
-    }
+    },
+    ...mapGetters({
+      isLoggedIn: "users/isLoggedIn"
+    })
   }
 };
 </script>
