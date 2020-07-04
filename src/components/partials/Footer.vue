@@ -74,6 +74,6 @@ export default {
         link: "https://www.instagram.com/?hl=fr"
       }
     ]
-  }),
+  })
 };
 </script>

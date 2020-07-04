@@ -5,7 +5,7 @@
     </h1>
     <v-form>
       <v-row justify="center">
-        <v-col cols="12" sm="12" md="6" lg="6">
+        <v-col cols="6" xs="12" sm="4" md="4" lg="4">
           <v-text-field v-model="username" label="username"></v-text-field>
           <v-text-field
             v-model="email"
@@ -69,6 +69,14 @@ export default {
           password: this.password
         };
         this.REGISTER(user);
+        this.$emit(
+          "showSnackbar",
+          "You are now registered",
+          "green",
+          4000,
+          "top"
+        );
+        this.$router.push("/");
       } else if (!this.username || !this.email || !this.password) {
         this.$emit(
           "showSnackbar",

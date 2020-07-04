@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-col cols="6" lg="6" md="6" sm="12" xs="12">
+      <v-col cols="6" lg="6" md="6" sm="6" xs="12">
         <h2>Contact form</h2>
         <v-form ref="form">
           <v-text-field v-model="name" label="Name" required></v-text-field>
@@ -45,7 +45,7 @@ export default {
           .then(response => {
             let msg = response.data.message;
             this.$emit("showSnackbar", `${msg}`, "green", 4000, "top");
-            console.log(response.data)
+            console.log(response.data);
           });
       }
     }

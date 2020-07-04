@@ -15,7 +15,7 @@ export default {
   components: {
     SampleProducts,
     Slider,
-    NewsLetter,
+    NewsLetter
   },
   data: () => ({
     productsLinks: [

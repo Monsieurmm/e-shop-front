@@ -5,8 +5,8 @@
     </h1>
     <v-form>
       <v-row justify="center">
-        <v-col cols="6" sm="4" md="4" lg="4">
-          <v-text-field v-model="email" label="mail address"></v-text-field>
+        <v-col cols="6" xs="12" sm="4" md="4" lg="4">
+          <v-text-field v-model="email" label="email address"></v-text-field>
           <v-text-field
             v-model="password"
             type="password"
@@ -25,18 +25,26 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+  import { mapActions, mapState } from "vuex";
 export default {
-  data: () => ({
-    email: "",
-    password: ""
-  }),
+  data() {
+    return {
+      email: "",
+      password: ""
+    }
+  },
+  created() {
+    this.$store.dispatch("users/GET_USERS");
+  },
+  computed: {
+    ...mapState("users", ["user"])
+  },
   methods: {
     ...mapActions({
       LOGIN: "users/LOGIN"
     }),
     login() {
-      if (!this.mail && !this.password) {
+      if (!this.email && !this.password) {
         window.alert("REQUIRED");
       } else {
         let user = {
@@ -44,13 +52,6 @@ export default {
           password: this.password
         };
         this.LOGIN(user);
-        this.$emit(
-          "showSnackbar",
-          "You are now logged in",
-          "green",
-          4000,
-          "top"
-        );
         this.$router.push("/profile");
       }
     }

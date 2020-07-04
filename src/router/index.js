@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store/index.js";
 import Home from "../views/Home";
 
 Vue.use(VueRouter);
@@ -36,6 +37,14 @@ const routes = [
     path: "/thankyou",
     name: "thankyou",
     component: () => import("../components/Thankyou.vue")
+  },
+  {
+    path: "/secure",
+    name: "secure",
+    meta: {
+      requiresAuth: true
+    },
+    component: () => import("../components/partials/Secure.vue")
   },
   {
     path: "/login",
@@ -78,6 +87,18 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters("users/isLoggedIn")) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;

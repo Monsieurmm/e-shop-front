@@ -4,7 +4,6 @@
     <div class="card" v-if="user">
       <ul class="list-group">
         <li class="list-group-item">Email: {{ user.email }}</li>
-        <li class="list-group-item">Username: {{ user.username }}</li>
       </ul>
     </div>
   </div>
@@ -14,7 +13,9 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "profile",
-  computed: mapGetters("users", ["user"]),
+  computed: {
+    ...mapGetters("users", ["user"])
+  },
   methods: {
     ...mapActions({
       GET_PROFILE: "users/GET_PROFILE"

@@ -60,6 +60,14 @@ export default {
       this.mode = mode;
       this.snackbar = true;
     }
+  },
+  created() {
+    this.$http.interceptors.response.use(undefined, err => {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch("users/LOGOUT")
+        }
+        throw err;
+    });
   }
 };
 </script>
