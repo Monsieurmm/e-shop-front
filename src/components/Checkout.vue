@@ -60,7 +60,7 @@
 </template>
 
 <script>
-  import api from "../config/api";
+import api from "../config/api";
 import key from "../config/stripeKey";
 
 export default {

@@ -37,22 +37,26 @@ export default {
   },
   methods: {
     getProductsData() {
-      api().get("/products").then(response => {
-        this.products = response.data.products;
-        this.currentPage = response.data.currentPage;
-        this.pages = response.data.pages;
-        this.nextUrl = response.data.nextUrl;
-        this.prevUrl = response.data.prevUrl;
-      });
+      api()
+        .get("/products")
+        .then(response => {
+          this.products = response.data.products;
+          this.currentPage = response.data.currentPage;
+          this.pages = response.data.pages;
+          this.nextUrl = response.data.nextUrl;
+          this.prevUrl = response.data.prevUrl;
+        });
     },
     checkPage(url) {
-      api().get(url).then(response => {
-        this.products = response.data.products;
-        this.currentPage = response.data.currentPage;
-        this.pages = response.data.pages;
-        this.nextUrl = response.data.nextUrl;
-        this.prevUrl = response.data.prevUrl;
-      });
+      api()
+        .get(url)
+        .then(response => {
+          this.products = response.data.products;
+          this.currentPage = response.data.currentPage;
+          this.pages = response.data.pages;
+          this.nextUrl = response.data.nextUrl;
+          this.prevUrl = response.data.prevUrl;
+        });
     }
   }
 };

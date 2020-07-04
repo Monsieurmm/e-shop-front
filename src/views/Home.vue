@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <Slider />
+    <Slider v-if="window.width > 850" />
     <SampleProducts />
     <NewsLetter />
     <v-footer color="white lighten-4" padless>
@@ -66,7 +66,24 @@ export default {
       address: "69 rue du Tilleul",
       city: "Paris",
       mail: "ok-tier@tier.com"
+    },
+    window: {
+      width: 0,
+      height: 0
     }
-  })
+  }),
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
+  }
 };
 </script>

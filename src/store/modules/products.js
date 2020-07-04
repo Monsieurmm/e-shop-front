@@ -28,18 +28,12 @@ const products = {
       commit("SET_PRODUCTS", response.data);
     },
     CREATE_PRODUCT: async ({ commit }, product) => {
-      let response = await api().post(
-        "/products",
-        product
-      );
+      let response = await api().post("/products", product);
       commit("ADD_PRODUCT", response.data);
     },
     UPDATE_PRODUCT: async ({ commit }, editedProduct) => {
       commit("EDIT_PRODUCT", editedProduct);
-      await api().put(
-        `/products/${editedProduct.id}`,
-        editedProduct
-      );
+      await api().put(`/products/${editedProduct.id}`, editedProduct);
     },
     DELETE_PRODUCT: async ({ commit }, id) => {
       let response = await api().delete(`/products/${id}`);

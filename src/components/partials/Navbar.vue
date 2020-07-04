@@ -62,7 +62,8 @@ export default {
     items: [
       { title: "Home", icon: "house", route: "/" },
       { title: "Account", icon: "account_box", route: "/login" },
-      { title: "Products", icon: "shopping", route: "/products" }
+      { title: "Products", icon: "shopping", route: "/products" },
+      { title: "Contact us", icon: "person", route: "/contact" }
     ]
   }),
   created() {
@@ -70,9 +71,11 @@ export default {
   },
   methods: {
     getCategories() {
-      api().get("/categories").then(response => {
-        this.categories = response.data;
-      });
+      api()
+        .get("/categories")
+        .then(response => {
+          this.categories = response.data;
+        });
     }
   },
   computed: {

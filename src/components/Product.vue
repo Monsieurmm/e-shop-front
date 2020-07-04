@@ -56,9 +56,11 @@ export default {
     };
   },
   created() {
-    api().get(`/products/${this.id}`).then(response => {
-      this.product = response.data;
-    });
+    api()
+      .get(`/products/${this.id}`)
+      .then(response => {
+        this.product = response.data;
+      });
   },
   methods: {
     checkout(e) {

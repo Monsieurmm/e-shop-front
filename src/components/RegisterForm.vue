@@ -8,9 +8,9 @@
         <v-col cols="12" sm="12" md="6" lg="6">
           <v-text-field v-model="username" label="username"></v-text-field>
           <v-text-field
-            v-model="mail"
+            v-model="email"
             label="mail address"
-            :rules="mailRules"
+            :rules="emailRules"
             required
           ></v-text-field>
           <v-text-field
@@ -31,20 +31,20 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 export default {
   data: () => ({
     error: "",
     snackbar: false,
     text: "",
     username: "",
-    mail: "",
-    mailRules: [
-      v => !!v || "Mail is required",
+    email: "",
+    emailRules: [
+      v => !!v || "email is required",
       v =>
         /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:+)\])+$/.test(
           v
-        ) || "E-mail must be valid"
+        ) || "email must be valid"
     ],
     password: "",
     passwordRules: [
@@ -57,40 +57,22 @@ export default {
     ]
   }),
   methods: {
+    ...mapActions({
+      REGISTER: "users/REGISTER"
+    }),
     register() {
-      if (this.username && this.mail && this.password) {
+      if (this.username && this.email && this.password) {
         let user = {
           username: this.username,
-          mail: this.mail,
+          email: this.email,
           password: this.password
         };
-        axios
-          .post("http://localhost:3000/users/register", user)
-          .then(() => {
-            this.$emit(
-              "showSnackbar",
-              "You are now registered",
-              "green",
-              5000,
-              "top"
-            );
-            this.$router.push("/");
-          })
-          .catch(error => {
-            console.log(error.response.data.result);
-            this.$emit(
-              "showSnackbar",
-              error.response.data.result,
-              "red",
-              4000,
-              "top"
-            );
-          });
-      } else if (!this.username || !this.mail || !this.password) {
+        this.REGISTER(user);
+      } else if (!this.username || !this.email || !this.password) {
         this.$emit(
           "showSnackbar",
           "You must fill the fields !",
-          "",
+          "red",
           4000,
           "top"
         );

@@ -48,9 +48,19 @@ const routes = [
     component: () => import("../components/RegisterForm.vue")
   },
   {
+    path: "/profile",
+    name: "profile",
+    component: () => import("../components/Profile.vue")
+  },
+  {
     path: "/dashboard",
     name: "dashboard",
     component: () => import("../components/Dashboard.vue")
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: () => import("../components/forms/ContactForm")
   }
   /*,
   {

@@ -5,6 +5,7 @@ import sliders from "./modules/sliders";
 import snackbar from "./modules/snackbar";
 import users from "./modules/users";
 import cart from "./modules/cart";
+import window from "./modules/windowWidth";
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     sliders,
     snackbar,
     users,
-    cart
+    cart,
+    window
   }
 });

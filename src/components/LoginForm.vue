@@ -6,13 +6,13 @@
     <v-form>
       <v-row>
         <v-col cols="12" sm="12" md="6" lg="6">
-          <v-text-field v-model="mail" label="mail address"></v-text-field>
+          <v-text-field v-model="email" label="mail address"></v-text-field>
           <v-text-field v-model="password" label="password"></v-text-field>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-btn @click="submit">Log in</v-btn>
+          <v-btn @click="login">Log in</v-btn>
         </v-col>
       </v-row>
     </v-form>
@@ -21,42 +21,34 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+import { mapActions } from "vuex";
 export default {
   data: () => ({
-    mail: "",
+    email: "",
     password: ""
   }),
   methods: {
-    submit() {
+    ...mapActions({
+      LOGIN: "users/LOGIN"
+    }),
+    login() {
       if (!this.mail && !this.password) {
         window.alert("REQUIRED");
       } else {
         let user = {
-          mail: this.mail,
+          email: this.email,
           password: this.password
         };
-        axios
-          .post("http://localhost:3000/login", user)
-          .then(() => {
-            this.$emit(
-              "showSnackbar",
-              "You are now logged in",
-              "green",
-              4000,
-              "top"
-            );
-            this.$router.push("/profile");
-          })
-          .catch(error => {
-            this.$emit(
-              "showSnackbar",
-              error.response.data.result,
-              "red",
-              4000,
-              "top"
-            );
-          });
+        this.LOGIN(user);
+        this.$emit(
+          "showSnackbar",
+          "You are now logged in",
+          "green",
+          4000,
+          "top"
+        );
+        this.$router.push("/profile");
       }
     }
   }
