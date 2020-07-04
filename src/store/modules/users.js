@@ -27,19 +27,23 @@ const users = {
       state.error = err.response.data.msg;
     },
     AUTH_REQUEST(state) {
+      state.error = null;
       state.status = "loading";
     },
     AUTH_SUCCESS(state, token, user) {
       state.token = token;
       state.user = user;
       state.status = "success";
+      state.error = null;
     },
     AUTH_ERROR(state, err) {
       state.error = err.response.data.msg;
     },
     LOGOUT(state) {
+      state.error = null;
       state.status = "";
       state.token = "";
+      state.user = "";
     },
     PROFILE_REQUEST(state) {
       state.status = "loading";
@@ -49,26 +53,27 @@ const users = {
   actions: {
     LOGIN: async ({ commit }, user) => {
       commit("AUTH_REQUEST");
-      await api()
-        .post("/users/login", user)
-        .then(response => {
-          if (response.data.success) {
-            const token = response.data.token;
-            const user = response.data.user;
-            localStorage.setItem("token", token);
-            axios.defaults.headers.common["Authorization"] = token;
-            commit("AUTH_SUCCESS", token, user);
-          }
-        })
-        .catch(err => {
-          commit("AUTH_ERROR", err);
-          localStorage.removeItem("token");
-        });
+        await api()
+            .post("/users/login", user)
+            .then(response => {
+              if (response.data.success) {
+                const token = response.data.token;
+                const user = response.data.user;
+                localStorage.setItem("token", token);
+                axios.defaults.headers.common["Authorization"] = token;
+                commit("AUTH_SUCCESS", token, user);
+              }
+            }).catch ((err) => {
+        commit("AUTH_ERROR", err);
+      })
     },
     REGISTER: async ({ commit }, user) => {
       try {
         commit("REGISTER_REQUEST");
-        let res = await api().post(`/users/register`, user);
+        let res = await api().post(
+          `/users/register`,
+            user
+        );
         if (res.data.success !== undefined) {
           commit("REGISTER_SUCCESS");
         }

@@ -39,14 +39,6 @@ const routes = [
     component: () => import("../components/Thankyou.vue")
   },
   {
-    path: "/secure",
-    name: "secure",
-    meta: {
-      requiresAuth: true
-    },
-    component: () => import("../components/partials/Secure.vue")
-  },
-  {
     path: "/login",
     name: "login",
     component: () => import("../components/LoginForm.vue")
