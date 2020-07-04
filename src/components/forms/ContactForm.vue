@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "../../config/api";
 export default {
   name: "contact",
   data() {
@@ -38,7 +38,7 @@ export default {
               "showSnackbar", `${error}`, "red", 4000, "top"
           );
       } else {
-          axios.post("http://localhost:3000/contact", msg).then(response => {
+          api().post("/contact", msg).then(response => {
               let msg = response.data.message;
               this.$emit("showSnackbar", `${msg}`, "green", 4000, "top");
           });
