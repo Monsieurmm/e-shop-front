@@ -1,10 +1,10 @@
 <template>
-  <v-content>
+  <v-content align="center">
     <h1>
       Register Page
     </h1>
-    <v-form ref="form" lazy-validation>
-      <v-row>
+    <v-form>
+      <v-row justify="center">
         <v-col cols="12" sm="12" md="6" lg="6">
           <v-text-field v-model="username" label="username"></v-text-field>
           <v-text-field
@@ -16,6 +16,7 @@
           <v-text-field
             v-model="password"
             label="password"
+            type="password"
             :rules="passwordRules"
           ></v-text-field>
         </v-col>

@@ -45,6 +45,7 @@ export default {
           .then(response => {
             let msg = response.data.message;
             this.$emit("showSnackbar", `${msg}`, "green", 4000, "top");
+            console.log(response.data)
           });
       }
     }

@@ -14,13 +14,14 @@
     <v-row justify="center" no-gutters>
       <v-btn
         v-for="link in links"
-        :key="link"
+        :key="link.title"
+        :href="link.route"
         color="indigo"
         text
         rounded
         class="my-2"
       >
-        {{ link }}
+        {{ link.title }}
       </v-btn>
       <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
         {{ new Date().getFullYear() }} —
@@ -33,7 +34,28 @@
 <script>
 export default {
   data: () => ({
-    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
+    links: [
+      {
+        title: "Home",
+        route: "/"
+      },
+      {
+        title: "Deployment",
+        route: "https://cloud.google.com/"
+      },
+      {
+        title: "API",
+        route: "https://nodejs.org/en/"
+      },
+      {
+        title: "Application",
+        route: "https://vuejs.org/"
+      },
+      {
+        title: "Contact Us",
+        route: "/contact"
+      }
+    ],
     icons: [
       {
         icon: "mdi-facebook",
@@ -52,6 +74,6 @@ export default {
         link: "https://www.instagram.com/?hl=fr"
       }
     ]
-  })
+  }),
 };
 </script>

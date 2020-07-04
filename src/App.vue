@@ -23,16 +23,22 @@
 
       <router-view v-on:showSnackbar="showSnackbar"></router-view>
     </v-content>
+    <v-footer color="white lighten-4" padless>
+      <Footer />
+    </v-footer>
   </v-app>
 </template>
 
 <script>
 import Navbar from "./components/partials/Navbar";
+import Footer from "./components/partials/Footer";
+
 export default {
   name: "App",
 
   components: {
-    Navbar
+    Navbar,
+    Footer
   },
 
   data: () => ({

@@ -3,9 +3,6 @@
     <Slider v-if="window.width > 850" />
     <SampleProducts />
     <NewsLetter />
-    <v-footer color="white lighten-4" padless>
-      <Footer />
-    </v-footer>
   </v-container>
 </template>
 
@@ -13,14 +10,12 @@
 import SampleProducts from "../components/SampleProducts";
 import Slider from "../components/Slider";
 import NewsLetter from "../components/partials/NewsLetter";
-import Footer from "../components/partials/Footer";
 
 export default {
   components: {
     SampleProducts,
     Slider,
     NewsLetter,
-    Footer
   },
   data: () => ({
     productsLinks: [

@@ -46,13 +46,14 @@
 
         <v-list-item>
           <v-list-item-title>
-            <router-link :to="{ name: 'login'}" v-if="!isLoggedIn">Log in</router-link>
+            <router-link :to="{ name: 'login' }" v-if="!isLoggedIn"
+              >Log in</router-link
+            >
             <a to="/logout" v-if="isLoggedIn" @click.prevent="logoutUser">
               <v-icon>how_to_reg</v-icon>
             </a>
           </v-list-item-title>
         </v-list-item>
-
       </v-list>
     </v-navigation-drawer>
   </nav>
