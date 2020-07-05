@@ -14,21 +14,15 @@ const products = {
       state.products.push(product);
     },
     EDIT_PRODUCT: (state, item) => {
-      state.products.item = item
+      state.products.item = item;
     },
     REMOVE_PRODUCT: (state, id) => {
-      const index = state.products
-          .map(products => products._id)
-          .indexOf(id);
+      const index = state.products.map(products => products._id).indexOf(id);
       state.products.splice(index, 1);
     }
   },
 
   actions: {
-    GET_PRODUCTS: async ({ commit }) => {
-      let response = await api().get("/products");
-      commit("SET_PRODUCTS", response.data);
-    },
     GET_ALL_PRODUCTS: async ({ commit }) => {
       await api()
         .get("/products/all")
@@ -45,9 +39,8 @@ const products = {
       commit("ADD_PRODUCT", response.data);
     },
     UPDATE_PRODUCT: async ({ commit }, item) => {
-      let response = await api()
-          .put(`/products/${item.id}`, item)
-      commit("EDIT_PRODUCT", response.data)
+      const response = await api().put(`/products/${item._id}`, item);
+      commit("EDIT_PRODUCT", response.data);
     },
     DELETE_PRODUCT: async ({ commit }, id) => {
       let response = await api().delete(`/products/${id}`);

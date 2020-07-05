@@ -165,12 +165,12 @@ export default {
       if (confirm("Are you sure you want to delete this product?") === true) {
         this.DELETE_PRODUCT(id);
         this.$emit(
-                "showSnackbar",
-                "Product has been deleted",
-                "green",
-                4000,
-                "top"
-        )
+          "showSnackbar",
+          "Product has been deleted",
+          "green",
+          4000,
+          "top"
+        );
         return this.$store.state.products;
       }
     },
@@ -186,7 +186,9 @@ export default {
     save(item) {
       this.editedIndex = this.products.indexOf(item);
       if (this.editedIndex > -1) {
+        console.log(this.editedIndex);
         this.UPDATE_PRODUCT(item);
+        console.log(item);
         return this.$store.state.products;
       }
     }

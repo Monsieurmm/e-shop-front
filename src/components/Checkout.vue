@@ -64,7 +64,7 @@ import api from "../config/api";
 import key from "../config/stripeKey";
 
 export default {
-  mounted() {
+  created() {
     let total = this.total;
     this.handler = {
       key: key.PUBLISHABLE_KEY,

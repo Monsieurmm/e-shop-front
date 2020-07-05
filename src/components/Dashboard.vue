@@ -25,10 +25,10 @@ export default {
   },
   data() {
     return {
-      component: "Products",
+      component: "Products"
     };
   },
-  beforeCreate() {
+  created() {
     this.$store.dispatch("products/GET_ALL_PRODUCTS");
   },
   methods: {
