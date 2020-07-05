@@ -53,27 +53,25 @@ const users = {
   actions: {
     LOGIN: async ({ commit }, user) => {
       commit("AUTH_REQUEST");
-        await api()
-            .post("/users/login", user)
-            .then(response => {
-              if (response.data.success) {
-                const token = response.data.token;
-                const user = response.data.user;
-                localStorage.setItem("token", token);
-                axios.defaults.headers.common["Authorization"] = token;
-                commit("AUTH_SUCCESS", token, user);
-              }
-            }).catch ((err) => {
-        commit("AUTH_ERROR", err);
-      })
+      await api()
+        .post("/users/login", user)
+        .then(response => {
+          if (response.data.success) {
+            const token = response.data.token;
+            const user = response.data.user;
+            localStorage.setItem("token", token);
+            axios.defaults.headers.common["Authorization"] = token;
+            commit("AUTH_SUCCESS", token, user);
+          }
+        })
+        .catch(err => {
+          commit("AUTH_ERROR", err);
+        });
     },
     REGISTER: async ({ commit }, user) => {
       try {
         commit("REGISTER_REQUEST");
-        let res = await api().post(
-          `/users/register`,
-            user
-        );
+        let res = await api().post(`/users/register`, user);
         if (res.data.success !== undefined) {
           commit("REGISTER_SUCCESS");
         }

@@ -77,7 +77,7 @@ export default {
       { title: "Contact us", icon: "book", route: "/contact" }
     ]
   }),
-  created() {
+  beforeCreate() {
     this.getCategories();
   },
   methods: {

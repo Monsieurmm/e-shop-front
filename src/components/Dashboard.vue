@@ -26,8 +26,10 @@ export default {
   data() {
     return {
       component: "Products",
-      products: []
     };
+  },
+  beforeCreate() {
+    this.$store.dispatch("products/GET_ALL_PRODUCTS");
   },
   methods: {
     toggleProducts() {

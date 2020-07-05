@@ -60,6 +60,6 @@ export default {
       this.mode = mode;
       this.snackbar = true;
     }
-  },
+  }
 };
 </script>

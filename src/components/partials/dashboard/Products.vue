@@ -1,85 +1,114 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="products"
-    :search="search"
-    sort-by="calories"
-    class="elevation-1"
-  >
-    <template v-slot:top>
-      <v-toolbar flat color="white">
-        <v-toolbar-title>My Products</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-        ></v-text-field>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on"
-              >New Product</v-btn
-            >
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" xs="12" sm="12" md="12" lg="12">
-                    <v-text-field
-                      v-model="editedProduct.title"
-                      label="Title"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" xs="12" sm="12" md="12" lg="12">
-                    <v-text-field
-                      v-model="editedProduct.image"
-                      label="Image"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" xs="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedProduct.price"
-                      label="Price"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" xs="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedProduct.rating"
-                      label="Rating"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save(editedProduct)"
-                >Save</v-btn
-              >
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+  <v-data-iterator :items="products" :search="search" hide-default-footer>
+    <template v-slot:header>
+      <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
+        <v-toolbar-title>Products</v-toolbar-title>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">
-        mdi-cogs
-      </v-icon>
-      <v-icon small @click="deleteProduct(item._id)">
-        mdi-delete
-      </v-icon>
+
+    <template v-slot:default="props">
+      <v-row>
+        <v-col cols="4">
+          <v-select
+            v-model="search"
+            :items="products"
+            item-text="category"
+            item-value="category"
+            label="Filter by category"
+            clearable
+          ></v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          v-for="item in props.items"
+          :key="item._id"
+          cols="12"
+          sm="12"
+          md="6"
+          lg="6"
+        >
+          <v-card>
+            <v-card-title class="subheading font-weight-bold">
+              <template>
+                <v-edit-dialog
+                  :return-value.sync="item.title"
+                  @save="save(item)"
+                >
+                  {{ item.title }}
+                  <template v-slot:input>
+                    <v-text-field
+                      v-model="item.title"
+                      label="Title"
+                      single-line
+                      counter
+                    ></v-text-field>
+                  </template>
+                </v-edit-dialog>
+              </template>
+            </v-card-title>
+
+            <img :src="item.image" />
+
+            <v-divider></v-divider>
+
+            <v-list dense>
+              <v-list-item>
+                <v-list-item-content>Src:</v-list-item-content>
+                <v-list-item-content class="align-end">
+                  <template>
+                    <v-edit-dialog
+                      :return-value.sync="item.image"
+                      @save="save(item)"
+                    >
+                      {{ item.image }}
+                      <template v-slot:input>
+                        <v-text-field
+                          v-model="item.image"
+                          label="Image"
+                          single-line
+                          counter
+                        ></v-text-field>
+                      </template>
+                    </v-edit-dialog>
+                  </template>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-content>Price:</v-list-item-content>
+                <v-list-item-content class="align-end">
+                  <template>
+                    <v-edit-dialog
+                      :return-value.sync="item.price"
+                      @save="save(item)"
+                    >
+                      {{ item.price }}
+                      <template v-slot:input>
+                        <v-text-field
+                          v-model="item.price"
+                          label="Price"
+                          single-line
+                          counter
+                        ></v-text-field>
+                      </template>
+                    </v-edit-dialog>
+                  </template>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-spacer></v-spacer>
+                <v-btn color="red" text @click="deleteProduct(item._id)">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-col>
+      </v-row>
     </template>
-  </v-data-table>
+  </v-data-iterator>
 </template>
 
 <script>
@@ -116,9 +145,6 @@ export default {
   }),
 
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "New Product" : "Edit Product";
-    },
     ...mapState("products", ["products"])
   },
 
@@ -128,10 +154,6 @@ export default {
     }
   },
 
-  created() {
-    this.$store.dispatch("products/GET_PRODUCTS");
-  },
-
   methods: {
     ...mapActions({
       CREATE_PRODUCT: "products/CREATE_PRODUCT",
@@ -139,16 +161,17 @@ export default {
       DELETE_PRODUCT: "products/DELETE_PRODUCT"
     }),
 
-    editItem(item) {
-      this.editedIndex = this.products.indexOf(item);
-      this.editedProduct = Object.assign({}, item);
-      this.dialog = true;
-    },
-
     deleteProduct(id) {
       if (confirm("Are you sure you want to delete this product?") === true) {
         this.DELETE_PRODUCT(id);
-        this.$store.dispatch("products/GET_PRODUCTS");
+        this.$emit(
+                "showSnackbar",
+                "Product has been deleted",
+                "green",
+                4000,
+                "top"
+        )
+        return this.$store.state.products;
       }
     },
 
@@ -160,18 +183,11 @@ export default {
       });
     },
 
-    save(editedProduct) {
+    save(item) {
+      this.editedIndex = this.products.indexOf(item);
       if (this.editedIndex > -1) {
-        this.UPDATE_PRODUCT(editedProduct);
-        this.dialog = false;
-        this.$store.dispatch("products/GET_PRODUCTS");
-        this.$emit(
-          "showSnackbar",
-          "Product has been updated",
-          "green",
-          4000,
-          "top"
-        );
+        this.UPDATE_PRODUCT(item);
+        return this.$store.state.products;
       }
     }
   }

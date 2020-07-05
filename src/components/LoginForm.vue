@@ -25,13 +25,13 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
       email: "",
       password: ""
-    }
+    };
   },
   created() {
     this.$store.dispatch("users/GET_USERS");

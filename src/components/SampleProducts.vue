@@ -32,7 +32,7 @@ export default {
       nextUrl: ""
     };
   },
-  created() {
+  beforeCreate() {
     this.getProductsData();
   },
   methods: {

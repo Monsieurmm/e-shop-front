@@ -13,11 +13,13 @@ const products = {
     ADD_PRODUCT: (state, product) => {
       state.products.push(product);
     },
-    EDIT_PRODUCT: (state, editedProduct) => {
-      state.products.editedProduct = editedProduct;
+    EDIT_PRODUCT: (state, item) => {
+      state.products.item = item
     },
     REMOVE_PRODUCT: (state, id) => {
-      const index = state.products.indexOf(product => product.id == id);
+      const index = state.products
+          .map(products => products._id)
+          .indexOf(id);
       state.products.splice(index, 1);
     }
   },
@@ -27,13 +29,25 @@ const products = {
       let response = await api().get("/products");
       commit("SET_PRODUCTS", response.data);
     },
+    GET_ALL_PRODUCTS: async ({ commit }) => {
+      await api()
+        .get("/products/all")
+        .then(response => {
+          const agencies = response.data;
+          commit("SET_PRODUCTS", agencies);
+        })
+        .catch(error => {
+          throw error;
+        });
+    },
     CREATE_PRODUCT: async ({ commit }, product) => {
       let response = await api().post("/products", product);
       commit("ADD_PRODUCT", response.data);
     },
-    UPDATE_PRODUCT: async ({ commit }, editedProduct) => {
-      commit("EDIT_PRODUCT", editedProduct);
-      await api().put(`/products/${editedProduct.id}`, editedProduct);
+    UPDATE_PRODUCT: async ({ commit }, item) => {
+      let response = await api()
+          .put(`/products/${item.id}`, item)
+      commit("EDIT_PRODUCT", response.data)
     },
     DELETE_PRODUCT: async ({ commit }, id) => {
       let response = await api().delete(`/products/${id}`);
