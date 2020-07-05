@@ -8,7 +8,7 @@
 
     <template v-slot:default="props">
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" xs="12" sm="4" md="4" lg="4">
           <v-select
             v-model="search"
             :items="products"
@@ -19,7 +19,7 @@
           ></v-select>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row justify="center">
         <v-col
           v-for="item in props.items"
           :key="item._id"
@@ -27,6 +27,7 @@
           sm="12"
           md="6"
           lg="6"
+          align="center"
         >
           <v-card>
             <v-card-title class="subheading font-weight-bold">
@@ -48,7 +49,7 @@
               </template>
             </v-card-title>
 
-            <img :src="item.image" />
+            <img :src="item.image" contain="true" width="200px" />
 
             <v-divider></v-divider>
 
@@ -117,18 +118,6 @@ export default {
   data: () => ({
     dialog: false,
     search: "",
-    headers: [
-      {
-        text: "Name",
-        align: "start",
-        sortable: true,
-        value: "title"
-      },
-      { text: "Image", value: "image" },
-      { text: "Price", value: "price", sortable: true },
-      { text: "Rating", value: "rating", sortable: true },
-      { text: "Actions", value: "actions" }
-    ],
     editedIndex: -1,
     editedProduct: {
       title: "",
