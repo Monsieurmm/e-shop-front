@@ -59,7 +59,6 @@ export default {
         this.error = error.response.data.error;
         this.$emit("showSnackbar", `${error}`, "red", 4000, "top")
       }
-    }
   }
 };
 </script>

@@ -1,4 +1,5 @@
 import api from "../../config/api";
+import axios from "axios";
 import router from "../../router";
 const users = {
   namespaced: true,

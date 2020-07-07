@@ -15,10 +15,10 @@
           <v-btn text depressed @click="action('min', item)"
             ><v-icon>mdi-minus</v-icon></v-btn
           >
-          <v-btn text depressed @click="action('clear', item)"></v-btn>
           <v-btn text depressed @click="action('add', item)"
             ><v-icon>mdi-plus</v-icon></v-btn
           >
+          <v-btn text depressed @click="action('clear', item)">Remove all</v-btn>
         </v-list>
       </v-card>
     </v-container>
