@@ -25,19 +25,13 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
       email: "",
       password: ""
     };
-  },
-  created() {
-    this.$store.dispatch("users/GET_USERS");
-  },
-  computed: {
-    ...mapState("users", ["user"])
   },
   methods: {
     ...mapActions({
@@ -52,7 +46,14 @@ export default {
           password: this.password
         };
         this.LOGIN(user);
-        this.$router.push("/profile");
+        this.$emit(
+          "showSnackbar",
+          "You are now logged in",
+          "green",
+          4000,
+          "top"
+        );
+        this.$router.push("/");
       }
     }
   }

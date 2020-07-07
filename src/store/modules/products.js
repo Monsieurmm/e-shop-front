@@ -25,7 +25,7 @@ const products = {
   actions: {
     GET_ALL_PRODUCTS: async ({ commit }) => {
       await api()
-        .get("/products/all")
+        .get(`/products/all`)
         .then(response => {
           const agencies = response.data;
           commit("SET_PRODUCTS", agencies);

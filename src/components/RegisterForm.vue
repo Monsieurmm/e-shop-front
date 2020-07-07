@@ -39,9 +39,10 @@ export default {
     snackbar: false,
     text: "",
     username: "",
+    usernameRules: [v => !!v || "required"],
     email: "",
     emailRules: [
-      v => !!v || "email is required",
+      v => !!v || "required",
       v =>
         /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:+)\])+$/.test(
           v
@@ -54,7 +55,7 @@ export default {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[A-Za-z\d@$!%*?&^]).{8,}$/.test(
           v
         ) ||
-        "Password must have at least one Uppercase, one Lowercase, a number and a special character"
+        "Password must have at least one Uppercase, one Lowercase and a number"
     ]
   }),
   methods: {

@@ -10,12 +10,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "profile",
-  computed: {
-    ...mapGetters("users", ["user"])
-  },
   methods: {
     ...mapActions({
       GET_PROFILE: "users/GET_PROFILE"

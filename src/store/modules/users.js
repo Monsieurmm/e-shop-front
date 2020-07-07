@@ -1,5 +1,4 @@
 import api from "../../config/api";
-import axios from "axios";
 import router from "../../router";
 const users = {
   namespaced: true,
@@ -56,10 +55,10 @@ const users = {
       await api()
         .post("/users/login", user)
         .then(response => {
-          if (response.data.success) {
+          if (response.data.accessToken) {
             const token = response.data.token;
             const user = response.data.user;
-            localStorage.setItem("token", token);
+            localStorage.setItem("token", JSON.stringify(response.data));
             axios.defaults.headers.common["Authorization"] = token;
             commit("AUTH_SUCCESS", token, user);
           }
@@ -71,10 +70,12 @@ const users = {
     REGISTER: async ({ commit }, user) => {
       try {
         commit("REGISTER_REQUEST");
-        let res = await api().post(`/users/register`, user);
-        if (res.data.success !== undefined) {
-          commit("REGISTER_SUCCESS");
-        }
+        let res = await api()
+          .post(`/users/register`, user)
+          .then(res => {
+            commit("REGISTER_SUCCESS");
+            return res;
+          });
         return res;
       } catch (err) {
         commit("REGISTER_ERROR", err);
@@ -82,7 +83,7 @@ const users = {
     },
     GET_PROFILE: async ({ commit }) => {
       commit("PROFILE_REQUEST");
-      let res = await axios.get(`http://localhost:3000/users/profile`);
+      let res = await api().get(`/users/profile`);
       commit("USER_PROFILE", res.data.user);
       return res;
     },
