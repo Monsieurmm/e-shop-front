@@ -69,6 +69,12 @@ const routes = [
     name: "admin",
     component: () => import("../components/Admin")
   }
+  ,
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("../components/User")
+  }
   /*,
   {
     path: "/about",

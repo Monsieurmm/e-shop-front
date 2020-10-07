@@ -4,6 +4,8 @@
     <div class="card" v-if="user">
       <ul class="list-group">
         <li class="list-group-item">Email: {{ user.email }}</li>
+        <li class="list-group-item">Name: {{ user.name }}</li>
+        <li class="list-group-item">Address: {{ user.address }}</li>
       </ul>
     </div>
   </div>
