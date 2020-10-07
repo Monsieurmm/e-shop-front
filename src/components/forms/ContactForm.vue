@@ -11,6 +11,11 @@
             label="Your message"
             required
           ></v-textarea>
+          <v-textarea
+            v-model="info"
+            label="Add comments ?"
+            required
+          ></v-textarea>
           <v-btn value="Submit" @click="sendMessage">Send</v-btn>
         </v-form>
       </v-col>
