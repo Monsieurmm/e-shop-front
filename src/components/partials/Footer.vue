@@ -72,6 +72,10 @@ export default {
       {
         icon: "mdi-instagram",
         link: "https://www.instagram.com/?hl=fr"
+      },
+      {
+        icon: "mdi-tiktok",
+        link: "https://www.tiktok.com/?hl=fr"
       }
     ]
   })
