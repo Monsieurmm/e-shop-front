@@ -54,7 +54,7 @@ const users = {
     LOGIN: async ({ commit }, user) => {
       commit("AUTH_REQUEST");
       await api()
-        .post("/users/login", user)
+        .post(`/users/login`, user)
         .then(response => {
           if (response.data.accessToken) {
             const token = response.data.token;
@@ -84,7 +84,7 @@ const users = {
     },
     GET_PROFILE: async ({ commit }) => {
       commit("PROFILE_REQUEST");
-      let res = await api().get(`/users/profile`);
+      let res = await this.$http.get(`${process.env.API_URL}/users/profile`);
       commit("USER_PROFILE", res.data.user);
       return res;
     },
