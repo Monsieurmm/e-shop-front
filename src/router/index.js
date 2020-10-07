@@ -63,6 +63,12 @@ const routes = [
     name: "contact",
     component: () => import("../components/forms/ContactForm")
   }
+  ,
+  {
+    path: "/admin",
+    name: "admin",
+    component: () => import("../components/Admin")
+  }
   /*,
   {
     path: "/about",
