@@ -10,6 +10,9 @@
       <v-col cols="12" xs="4" md="4" lg="4" class="mobile">
         <v-btn ml="0" text depressed>Subscribe</v-btn>
       </v-col>
+      <v-col cols="12" xs="4" md="4" lg="4" class="mobile">
+        <v-btn ml="0" text depressed>Immitate</v-btn>
+      </v-col>
     </v-row>
   </div>
 </template>

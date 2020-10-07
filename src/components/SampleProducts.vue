@@ -74,4 +74,13 @@ export default {
 a {
   text-decoration: none;
 }
+
+div {
+  background-color: red
+}
+
+
+p {
+  background-color: black
+}
 </style>
